@@ -1,0 +1,303 @@
+;========================================================================
+;----------------------------- GLOBAL FUNCTION --------------------------
+;========================================================================
+
+;;-----function of stock report
+;------use to display each type of rice name (sum report & stock report)
+	R_DISP_RICE_NAME:
+		MOV AH,09H
+		LEA DX,NL
+		INT 21H	
+
+		MOV AH,09H
+		LEA DX,FR_RICE_STR
+		INT 21H	
+
+		MOV AH,09H
+		LEA DX,BA_RICE_STR
+		INT 21H	
+
+		MOV AH,09H
+		LEA DX,BR_RICE_STR
+		INT 21H	
+
+		MOV AH,09H
+		LEA DX,GL_RICE_STR
+		INT 21H	
+
+		MOV AH,09H
+		LEA DX,VE_RICE_STR
+		INT 21H	
+		ret
+
+;-----seperate digit thou, hund,ten and one (weight)
+	ST_R_SPR_W:
+		DIV HUNDRED
+		MOV UNIT_CAL_HUND,AL
+		MOV UNIT_CAL_ONE,AH
+
+		MOV AH,0
+		MOV AL,UNIT_CAL_HUND
+		DIV TEN
+		MOV UNIT_CAL_THOU,AL
+		MOV UNIT_CAL_HUND,AH	
+
+		MOV AH,0
+		MOV AL,UNIT_CAL_ONE
+		DIV TEN
+		MOV UNIT_CAL_TEN,AL
+		MOV UNIT_CAL_ONE,AH
+		ret	
+
+;---------seperate digit hund, ten, one and decimal
+	R_SPR_DIGIT:
+		DIV HUNDRED
+		MOV UNIT_CAL_TEN,AL
+		MOV UNIT_CAL_ONE,AH
+				
+		MOV AH,0
+		MOV AL,UNIT_CAL_ONE
+		DIV TEN
+		MOV UNIT_CAL_ONE,AL
+		MOV UNIT_DECIMAL,AH
+
+		MOV AH,0
+		MOV AL,UNIT_CAL_TEN
+		DIV TEN
+		MOV UNIT_CAL_HUND,AL
+		MOV UNIT_CAL_TEN,AH
+		RET
+
+;-----display weight and qty with no decimal(pack)
+	STOCK_R_DISP_NO_D:
+		;----cmp ten thou
+		CMP UNIT_CAL_TTHOU,0
+		JE ST_R_CHECK_DISP_THOU
+
+		JMP ST_R_DISPLAY_THOU
+		
+		;---display from thousand
+		ST_R_CHECK_DISP_THOU:
+			CMP UNIT_CAL_THOU,0
+			JNE ST_R_DISPLAY_THOU
+
+			MOV AH,02H
+			MOV DL,' '
+			INT 21H
+				
+			JMP ST_R_CHECK_DISP_HUND
+			
+		ST_R_DISPLAY_THOU:
+			MOV AH,02H
+			MOV DL,UNIT_CAL_THOU
+			ADD DL,48
+			INT 21H
+
+			JMP ST_R_DISPLAY_HUND
+					
+		;---display from hundred
+		ST_R_CHECK_DISP_HUND:
+		CMP UNIT_CAL_HUND,0
+		JNE ST_R_DISPLAY_HUND
+
+		MOV AH,02H
+		MOV DL,' '
+		INT 21H
+			
+		JMP ST_R_DISPLAY_TEN
+
+		ST_R_DISPLAY_HUND:
+			MOV AH,02H
+			MOV DL,UNIT_CAL_HUND
+			ADD DL,48
+			INT 21H
+
+		ST_R_DISPLAY_TEN:
+			CALL R_DISP_TEN_ONE
+
+		;---mov ten thou back to 0 then will not affect other
+		MOV UNIT_CAL_TTHOU,0
+		ret
+
+;---------------display hundred-th, ten-th and one-th (weight)
+	SUM_R_DISP_HUN_TEN_ONE:
+		CMP UNIT_CAL_HUND,0
+		JNE SUM_R_HUND
+
+		MOV AH,02H
+		MOV DL,' '
+		INT 21H
+		JMP SUM_R_TEN
+			
+		SUM_R_HUND:
+			MOV AH,02H
+			MOV DL,UNIT_CAL_HUND
+			ADD DL,30H
+			INT 21H
+
+		;-----display tenth and one's
+		SUM_R_TEN:
+			CALL R_DISP_TEN_ONE
+		RET
+
+;----------display ten-th and one-th (weight)
+	R_DISP_TEN_ONE:
+		;---display ten
+		MOV AH,02H
+		MOV DL,UNIT_CAL_TEN
+		ADD DL,30H
+		INT 21H
+		
+		;---display one
+		MOV AH,02H
+		MOV DL,UNIT_CAL_ONE
+		ADD DL,30H
+		INT 21H
+		RET
+
+;---------------calculate latest weight (pack+unpack)
+	ST_R_CAL_LATEST_TT_W:
+		MOV AH,0
+		MOV AL,UNIT_CAL_THOU
+		MUL HUNDRED
+		MUL TEN
+		ADD NEW_STOCK_ON_HAND,AX
+
+		MOV AH,0
+		MOV AL,UNIT_CAL_HUND
+		MUL HUNDRED
+		ADD NEW_STOCK_ON_HAND,AX
+
+		MOV AH,0
+		MOV AL,UNIT_CAL_TEN
+		MUL TEN
+		ADD NEW_STOCK_ON_HAND,AX
+
+		MOV AH,0
+		MOV AL,UNIT_CAL_ONE
+		ADD NEW_STOCK_ON_HAND,AX
+			
+		MOV AX,RICE_WEIGHT_ADD
+		ADD NEW_STOCK_ON_HAND,AX
+		RET
+
+;----before check rice num, store the new stock result first
+	ST_R_UPDATE_ADD_RICE_W:
+		MOV AX,RICE_WEIGHT_ADD
+		MUL TEN_FOR_N_W
+
+		CMP RICE_NUM,1
+		JNE ST_R_CHECK_NEXT1
+			
+		ADD FR_UNP_ON_HAND,AX
+
+		ST_R_CHECK_NEXT1:
+			CMP RICE_NUM,2
+			JNE ST_R_CHECK_NEXT2
+
+			ADD BA_UNP_ON_HAND,AX
+
+		ST_R_CHECK_NEXT2:
+			CMP RICE_NUM,3
+			JNE ST_R_CHECK_NEXT3
+				
+			ADD BR_UNP_ON_HAND,AX
+
+		ST_R_CHECK_NEXT3:
+			CMP RICE_NUM,4
+			JNE ST_R_CHECK_NEXT4
+	
+			ADD GL_UNP_ON_HAND,AX
+
+		ST_R_CHECK_NEXT4:
+			CMP RICE_NUM,5
+			JNE ST_R_CLEAR_W_ADD
+			ADD VE_UNP_ON_HAND,AX
+
+		ST_R_CLEAR_W_ADD:
+			MOV RICE_WEIGHT_ADD,0
+		RET
+
+;------------display error message------------------
+	R_DISP_ERROR_MESSAGE:
+		CALL GENERATE_SOUND
+		MOV AH,09H
+		LEA DX,NL
+		INT 21H
+
+		MOV AH,09H
+		LEA DX,ERROR_MSG_1
+		INT 21H
+
+		MOV AH,09H
+		LEA DX,PRESS_KEY
+		INT 21H
+
+		MOV AH,01H
+		INT 21H
+		CMP AL,' '
+		JE	R_SELECT_FIN
+
+		
+		RET
+
+;------------Exit (user select finish)----------------
+	R_SELECT_FIN:		
+		MOV AH,09H
+		LEA DX,END_MSG 
+		INT 21H		
+		JMP FIN	
+
+;----------clear screen funtion----------------------
+CLEARSCREEN PROC
+
+	XOR AX,AX
+	XOR BX,BX
+	XOR CX,CX
+	XOR DX,DX
+	
+	MOV AX,0600H
+	MOV BH,07H
+	MOV CX,0000H
+	MOV DX,204FH
+	INT 10H
+	
+	MOV AH,02h
+	MOV BH,0
+	MOV DX,0000H
+	INT 10H	    
+
+	RET
+CLEARSCREEN ENDP
+
+;------------------------GENERATE SOUND---------------------------------
+
+GENERATE_SOUND PROC
+
+SOUND:
+    MOV     AL, 182         ; Prepare the speaker for the
+    OUT     43H, AL         ;  note.
+    MOV     AX, 3224        ; Frequency number (in decimal)
+                                
+    OUT     42H, AL         ; Output low byte.
+    MOV     AL, AH          ; Output high byte.
+    OUT     42H, AL 
+    IN      AL, 61H         ; Turn on note (get value from
+                                ; port 61h).
+    OR      AL, 00000011B   ; Set bits 1 and 0.
+    OUT     61H, AL         ; Send new value.
+    MOV     BX, 4          ; Pause for duration of note.
+.PAUSE1:
+    MOV     CX, 65535
+.PAUSE2:
+    DEC     CX
+    JNE     .PAUSE2
+    DEC     BX
+    JNE     .PAUSE1
+    IN      AL, 61H         ; Turn off note (get value from
+                                 ;port 61h).
+    AND     AL, 11111100B   ; Reset bits 1 and 0.
+    OUT     61H, AL         ; Send new value
+		
+RET
+GENERATE_SOUND ENDP

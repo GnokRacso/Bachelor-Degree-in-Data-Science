@@ -1,0 +1,479 @@
+.DATA
+	NL DB 10,13,"$"
+	;=======COMPANY NAME===========
+	COMPANY DB 13,10,13,10," ==============================="
+            	DB 13,10,      "     JASMINE RICE ENTERPRISE"
+	    	DB 13,10,      " ===============================$"
+	
+	;=======LOGIN MENU=============
+	LOGINMENU DB 13,10," 1. STAFF LOGIN"
+                  DB 13,10," 2. VIEW RICE MENU"
+		  DB 13,10," 3. EXIT$"
+
+	;==============RICE MENU FOR CUSTOMER=============
+	RICEMENU  DB 13,10," ==================="
+                  DB 13,10,"    TYPE OF RICE"
+		  DB 13,10," ==================="
+		  DB 13,10," 1. PACKED RICE"
+		  DB 13,10," 2. UNPACKED RICE"
+		  DB 13,10," 3. BACK TO MENU$"
+	
+	;===============UNPACKED RICE MENU===============
+	UNPACK_MENU DB 13,10
+		    DB 13,10,"                   UNPACK MENU                "
+		    DB 13,10,"                   -----------"
+		    DB 13,10
+		    DB 13,10,"  ================================================"
+		    DB 13,10,"  ItemNo.   Type of Rice          Price (RM/100g) "
+		    DB 13,10,"  ================================================"
+		    DB 13,10,"    R1.     Fragrant of Rice           0.50"
+		    DB 13,10,"    R2.     Basmati Rice               1.00"
+		    DB 13,10,"    R3.     Brown Rice                 0.60"
+	  	    DB 13,10,"    R4.     Glutinuous Rice            0.60"
+		    DB 13,10,"    R5.     Rice Vermicelli            0.60"
+		    DB 13,10,"  ================================================"
+		    DB 13,10,"$"
+
+	;============PACKED RICE MENU=====================
+	PACK_MENU DB 13,10
+		  DB 13,10,"                           PACK MENU                "
+		  DB 13,10,"                          ------------"
+		  DB 13,10
+		  DB 13,10,"  ================================================================"
+		  DB 13,10,"  ItemNo.   Type of Rice          Weight (kg)    Price (RM/kg) "
+		  DB 13,10,"  ================================================================"
+		  DB 13,10,"   R1.      Fragrant of Rice         10 (B)          48.50        "
+		  DB 13,10,"                                      5 (S)          25.50        "
+		  DB 13,10,"  ----------------------------------------------------------------"
+		  DB 13,10,"   R2.      Basmati Rice              5 (B)          47.50       "
+		  DB 13,10,"                                      1 (S)          10.00       "
+		  DB 13,10,"  ----------------------------------------------------------------"
+		  DB 13,10,"   R3.      Brown Rice               10 (B)          56.90       "
+		  DB 13,10,"                                      5 (S)          30.00       "
+		  DB 13,10,"  ----------------------------------------------------------------"
+	  	  DB 13,10,"   R4.      Glutinuous Rice          10 (B)          58.90       "
+	  	  DB 13,10,"                                      5 (S)          31.00       "
+		  DB 13,10,"  ----------------------------------------------------------------"
+		  DB 13,10,"   R5.      Rice Vermicelli          10 (B)          60.80       "
+		  DB 13,10,"                                      5 (S)          32.00       "
+		  DB 13,10,"  ----------------------------------------------------------------"
+		  DB 13,10,"$"
+
+	SYSTEM_MENU DB 13,10
+		    DB 13,10,"	================================"
+		    DB 13,10,"	1. ORDER"
+		    DB 13,10,"	2. STOCK REPORT"
+		    DB 13,10,"	3. BACK TO MENU"
+		    DB 13,10,"	================================"
+	            DB 13,10,"	ENTER YOUR SELECTION:	$"
+	
+	;==STRING INPUT FOR LOGIN==
+	ID_LIST	LABEL BYTE
+	IDMAX_LEN DB 7
+	IDACT_LEN DB ?
+	IDENTER_DATA DB 7 DUP("$")
+
+	PASS_LIST LABEL BYTE
+	PASSMAX_LEN DB 7
+	PASSACT_LEN DB ?
+	PASSENTER_DATA DB 7 DUP("$")
+
+	LOGINSTR1     DB 13,10,13,10," ENTER YOUR SELECTION:	$"
+	LOGINSTR2     DB 13,10,"	ENTER STAFF ID:	$"
+	LOGINSTR4     DB 13,10,"	ENTER STAFF PASSWORD:	$"
+
+	EXITSTR1      DB 13,10,"	BACK TO MENU?(Y/N):	$"
+	PASSSTR1      DB 13,10,"	ENTER SYSTEM SECRET PASSWORD TO CHANGE PASSWORD:	$"
+	FORGETPASSSTR DB 13,10,"	FORGET PASSWORD?(Y/N): $"
+	ERROR_MSG_1   DB 13,10,"	INVALID INPUT DETECTED.PLEASE TRY AGAIN!$"
+	ERROR_MSG_2   DB 13,10,"	USERNAME DOES NOT EXISTS!"
+		      DB 13,10,"	TRY AGAIN OR EXIT (A = AGAIN/E = EXIT):	$"
+	ERROR_MSG_3   DB 13,10,"	INCORRECT PASSWORD DETECTED!"
+		      DB 13,10,"	TRY AGAIN OR EXIT (A = AGAIN/E = EXIT):	$"
+	PRESS_KEY DB 13,10,"	PRESS ANY KEY TO CONTINUE([SPACE] TO EXIT)......$"
+
+	PASSSTR2       DB 13,10,"	ENTER NEW PASSWORD(6 CHARACTERS):	$"
+	PASSSTR3       DB 13,10,"	CONFIRM PASSWORD		:	$"
+	PASSSTR4       DB 13,10,"	ARE YOU SURE WANT TO CHANGE THE PASSWORD:	$"
+	NOT_MATCH      DB 13,10,"	INCORRECT SECRET PASSWORD DETECTED! FAILED TO CHANGE PASSWORD!$"
+	PASS_NOT_MATCH DB 13,10,"	PASSWORD NOT MATCH!"
+		       DB 13,10,"	TRY AGAIN OR EXIT (A= AGAIN/ E = EXIT):	$"
+
+	SUCCESS_LOGIN  DB 13,10,"===================================================================" 
+		       DB 13,10,"	CONGRATULATION, WELCOME TO JASMINE RICE ENTERPRISE"
+		       DB 13,10,"===================================================================$"
+	FORGET_PASS    DB 13,10,"==================================================================="
+		       DB 13,10,"				FORGET PASSWORD"
+		       DB 13,10,"===================================================================$"
+	
+	CHANGED     DB 13,10,"	PASSWORD CHANGE SUCCESSFULLY!!!$"
+	ERROR_MSG_4 DB 13,10,"	FAILED TO CHANGE PASSWORD!$"
+	END_MSG     DB 13,10,13,10,"THANK YOU FOR USING THIS SYSTEM!!!$"
+	
+	;============LOGIN PASSWORD=========
+
+	SECRETPASS  DB "YLJHLL$"
+	LOGINSTAFF  DB "JOAN00$"
+	PASSSTAFF   DB "JH1018$"
+	AST         DB "*$"
+	
+	LOGINSLEC  DB ?
+	RICESLEC   DB ?
+	EXITSLEC   DB ?
+	FORGETSLEC DB ?
+	AGAINSLEC  DB ?
+	SURESLEC   DB ?
+	
+	COUNT    DB 0
+	NUM      DB 0
+
+	PASSARR1        DB 6 DUP("$")
+	PASSARR2        DB 6 DUP("$")
+	STAFF_PASS_ARR  DB 6 DUP("$")
+	SECRET_PASS_ARR DB 6 DUP ("$")
+
+	;==================== SHARED VARIABLE BY REPORTS AND ORDER ==================
+	;----PRICE OF RICE
+	FR_10KG_PRICE DW 485  ;--48.50
+	FR_5KG_PRICE  DW 255  ;--25.50
+	FR_100G_PRICE DB 5    ;---0.50
+
+	BA_5KG_PRICE  DW 475 ;--47.50
+	BA_1KG_PRICE  DW 100 ;--10.00
+	BA_100G_PRICE DB 10   ;--1.00
+
+	BR_10KG_PRICE DW 569  ;--56.90
+	BR_5KG_PRICE  DW 300  ;--30.00
+	BR_100G_PRICE DB 6    ;---0.60
+
+	GL_10KG_PRICE DW 589  ;--58.90
+	GL_5KG_PRICE  DW 310  ;--31.00
+	GL_100G_PRICE DB 6    ;---0.60
+
+	VE_10KG_PRICE DW 608  ;--60.80
+	VE_5KG_PRICE  DW 320  ;--32.00
+	VE_100G_PRICE DB 6    ;---0.60	  
+
+	ZERO    DB 0
+	ONE     DB 1
+	FIVE    DB 5
+	TEN     DB 10
+	HUNDRED DB 100
+
+	DOT DB "."
+	KG  DB " kg$"
+	RM  DB 'RM $'
+	
+	;----FOR PACK RICE (QTY)  
+	FR_P_5KG_TOTALSOLD DB 21   ;5kg - 25.50
+	BA_P_1KG_TOTALSOLD DB 14   ;1kg - 10.00
+	BR_P_5KG_TOTALSOLD DB 12   ;5kg - 30.00
+	GL_P_5KG_TOTALSOLD DB 13   ;5kg - 31.00
+	VE_P_5KG_TOTALSOLD DB 10   ;5kg - 32.00
+
+	;----FOR PACK RICE (QTY)   
+	FR_P_10KG_TOTALSOLD DB 15  ;10kg - 48.50 
+	BA_P_5KG_TOTALSOLD  DB 12  ;5kg - 47.50 
+	BR_P_10KG_TOTALSOLD DB 11  ;10kg - 56.90 
+	GL_P_10KG_TOTALSOLD DB 10  ;10kg - 58.90 
+	VE_P_10KG_TOTALSOLD DB 8   ;10kg - 60.80 
+
+	;----FOR UNPACK RICE (kg)  
+	FR_UNP_TOTALSOLD DW 1853   ;--185.3kg ;Fragrant of Rice - 0.50 / 100g
+	BA_UNP_TOTALSOLD DW 602    ;Basmati Rice - 1.00 / 100g
+	BR_UNP_TOTALSOLD DW 848    ;Brown Rice - 0.60 / 100g
+	GL_UNP_TOTALSOLD DW 1171   ;Glutinuous Rice - 0.60 / 100g
+	VE_UNP_TOTALSOLD DW 939    ;Rice Vermicelli - 0.60 / 100g
+
+	;========================== FOR ORDER =======================
+
+	ORDER_MENU  DB 13,10
+		    DB 13,10,"  ORDER"
+		    DB 13,10,"  -----------"
+		    DB 13,10,"  1. Unpack Rice"
+		    DB 13,10,"  2. Pack Rice "
+		    DB 13,10,"  3. Proceed to Summary Report "
+		    DB 13,10
+		    DB 13,10,"  Your choice (1/2/3): $"
+
+	ASK_ITEMNO      DB 13,10,"	Enter ItemNo (1-5)       : R$"
+	ASK_WEIGHT      DB 13,10,"	Enter Weight (0.1-4.9)   : $"
+	ASK_WEIGHT_P    DB 13,10,"	Enter Weight (S/B)       : $"
+	ASK_QTY         DB 13,10,"	Enter Quantity           : $"
+
+	;--FOR INPUT & CALCULATION
+	ITEMNO               DB ?
+	WEIGHT               DB ?
+	QTY                  DB ?
+	TOTAL_WEIGHT         DB 0
+	ORDER_SUBTOTAL       DW 0
+	SERVICE_CHARGE_RATE  DB 6
+	SERVICE_CHARGE_TOTAL DW ?
+	GRANDTOTAL           DW ?
+
+	A DW ?
+	B DW ?
+
+	CASHSTR LABEL BYTE
+	MAXN DB 7
+	ACTN DB ?
+	ACTCASHSTR DB 7 DUP(0)
+
+	DECIMAL DB 0
+	DIGIT   DW 0
+	CASH    DW 0
+	CHANGE  DW 0
+
+	BLANK    DB " "
+	BLANK_2  DB "  $"
+	BLANK_4  DB "    $"
+	BLANK_5  DB "     $"
+	BLANK_7  DB "       $"
+	BLANK_15 DB "               $"
+	BLANK_36 DB "                                    $"
+
+	;--CART
+	ORDER_COUNT DB 0
+	ORDER_ID    DB 110
+
+	ORDER_UNPACK_OR_PACK DB 100 DUP(?)
+	ORDER_ITEM           DB 100 DUP(?)
+	ORDER_WEIGHT         DB 100 DUP(?)
+	ORDER_QTY            DB 100 DUP(?)
+
+	CART_TITLE        DB 13,10
+		          DB 13,10,"                               ---------------"
+		          DB 13,10,"                                Order Details"
+		          DB 13,10,"                               ---------------$"
+	CART_HEADER_TITLE DB 13,10
+		          DB 13,10,"               --------------------------------------------------"
+		          DB 13,10,"               NO.   ITEM NAME         WEIGHT       QTY   "
+		          DB 13,10,"               --------------------------------------------------$"
+	CART_BORDER_1     DB 13,10
+		          DB 13,10,"               --------------------------------------------------"
+		          DB 13,10,"                                      SUBTOTAL           $"
+	CART_BORDER_2     DB 13,10,"                                    =============================$"
+	CART_BORDER_3     DB 13,10
+		          DB 13,10
+		          DB 13,10,"  [1] Continue Order"
+		          DB 13,10,"  [2] Proceed to Payment"
+		          DB 13,10,"  [3] Cancel Order"
+		          DB 13,10
+		          DB 13,10,"  Your choice (1/2/3) : $"
+
+	;--RICE NAME 
+	FR_NAME DB "Fragrant of Rice$"
+	BA_NAME DB "Basmati Rice    $"
+	BR_NAME DB "Brown Rice      $"
+	GL_NAME DB "Glutinuous Rice $"
+	VE_NAME DB "Rice Vermicelli $"
+
+	;--------------------
+	;--PAYMENT VARIABLE--
+	;--------------------
+	PAYMENT_RECEIPT_HEADER  DB 13,10
+				DB 13,10,"                                      \||/           "
+				DB 13,10,"                                   -\| o o |/-       "
+				DB 13,10,"                                     |  ^  |         "
+				DB 13,10,"                                  =============      "
+				DB 13,10,"                               --    JASMINE    --   "
+				DB 13,10,"                                  =============      "
+				DB 13,10
+				DB 13,10,"           ===========================================================$"
+
+	PAYMENT_RECEIPT_ORDER_ID     DB 13,10,"           ORDER ID       : $"
+	PAYMENT_RECEIPT_DATE         DB 13,10,"           DATE & TIME    : $"
+	PAYMENT_RECEIPT_HEADER_END   DB 13,10,"           ===========================================================$"
+	PAYMENT_SERVICE_CHARGE_TOTAL DB 13,10,"                                      SERVICE CHARGE 6%  $"
+	PAYMENT_LINE_1               DB 13,10,"                                      ---------------------------$"
+	PAYMENT_GRAND_TOTAL          DB 13,10,"                                      GRAND TOTAL     RM $"
+	PAYMENT_LINE_2               DB 13,10,"                                      ===========================$"
+	PAYMENT_CASH                 DB 13,10
+				     DB 13,10,"                                      CASH             RM $"
+	PAYMENT_CHANGE               DB 13,10,"                                      CHANGE           RM$"
+	PAYMENT_THANKS               DB 13,10
+				     DB 13,10,"           ==========================================================="
+				     DB 13,10,"                       THANK YOU! HOPE YOU HAVE A NICE DAY :)"
+				     DB 13,10,"           ===========================================================$"
+	PAYMENT_ASK_CONTINUE         DB 13,10,"           Do you want to continue order? (Y/N) $"
+	PAYMENT_ASK_CONTINUE_ANS     DB ?
+
+	ERROR_MSG_STR DB "  INVALID INPUT! PLEASE ENTER AGAIN$"
+
+	;----FOR PACK RICE (QTY)  
+	TEMP_FR_P_5KG_TOTALSOLD DB 0   ;5kg 
+	TEMP_BA_P_1KG_TOTALSOLD DB 0   ;1kg 
+	TEMP_BR_P_5KG_TOTALSOLD DB 0   ;5kg
+	TEMP_GL_P_5KG_TOTALSOLD DB 0   ;5kg 
+	TEMP_VE_P_5KG_TOTALSOLD DB 0   ;5kg 
+
+	;----FOR PACK RICE (QTY)   
+	TEMP_FR_P_10KG_TOTALSOLD DB 0  ;10kg 
+	TEMP_BA_P_5KG_TOTALSOLD  DB 0  ;5kg 
+	TEMP_BR_P_10KG_TOTALSOLD DB 0  ;10kg  
+	TEMP_GL_P_10KG_TOTALSOLD DB 0  ;10kg 
+	TEMP_VE_P_10KG_TOTALSOLD DB 0  ;10kg 
+
+	;----FOR UNPACK RICE (kg)  
+	TEMP_FR_UNP_TOTALSOLD DW 0   ;Fragrant of Rice 100g
+	TEMP_BA_UNP_TOTALSOLD DW 0   ;Basmati Rice     100g
+	TEMP_BR_UNP_TOTALSOLD DW 0   ;Brown Rice       100g
+	TEMP_GL_UNP_TOTALSOLD DW 0   ;Glutinuous Rice  100g
+	TEMP_VE_UNP_TOTALSOLD DW 0   ;Rice Vermicelli  100g
+
+
+	;=========================FOR REPORT====================
+	R_SELECT_STR DB 13,10,13,10,' Selection : $'
+	R_SELECT DB 0
+
+	FR_RICE_STR DB 13,10,' (R1) Fragrant Rice        $'
+	BA_RICE_STR DB 13,10,' (R2) Basmati Rice         $'
+	BR_RICE_STR DB 13,10,' (R3) Brown Rice           $'
+	GL_RICE_STR DB 13,10,' (R4) Glutinous Rice       $'
+	VE_RICE_STR DB 13,10,' (R5) Rice Vermicelli      $'
+
+	;-----share by packed and unpacked, to store digit one's, ten's, hund's, thou's and ten thou's   
+	UNIT_CAL_TTHOU   DB 0    
+	UNIT_CAL_ONE     DB ?
+	UNIT_CAL_TEN     DB ?
+	UNIT_CAL_HUND    DB ?
+	UNIT_CAL_THOU    DB ?
+	UNIT_DECIMAL     DB ?
+	CAL_RESULT_PRICE DW 0
+
+	RICE_NUM     DB 1
+	STATUS_SUM_R DB ?                   ;P OR U (UNPACKED),T
+
+	P_RICE_BIG_SOLD   DB ?          ;---qty
+	P_RICE_SMALL_SOLD DB ?
+	SMALL_P_PER_KG    DW ?
+	BIG_P_PER_KG      DW ?
+
+	UP_PRICE     DB ?
+	UP_RICE_SOLD DW ?
+
+	;----ten use for DW
+	TEN_FOR_N_W DW 10
+
+	;--------ask if back to report menu
+	BACK_R_SELECT DB 'Y'
+
+	;=====================FOR STOCK REPORT==================
+	STOCK_R_MENU  DB 13,10,13,10, "------------------------------------"
+		      DB 13,10,"           STOCK REPORT           "
+		      DB 13,10,"------------------------------------"
+		      DB 13,10,"  1.  Stock Balance "
+		      DB 13,10,"  2.  Stock Details"
+		      DB 13,10,"  3.  Add Stock Amount "
+		      DB 13,10,"  4.  Back to Main Menu "
+		      DB 13,10,"  5.  Exit $"
+
+	STOCK_R_RICE_D_HEADER DB 13,10,13,10
+			      DB 13,10,'    Type of Rice          Weight On Hold    Number of Packets '
+			      DB 13,10,' ---------------------   -----------------  ------------------$'
+	
+	STOCK_R_RICE_B_HEADER DB 13,10
+			      DB 13,10,'    Type of Rice        Total Weight On Hold   '
+			      DB 13,10,' -------------------   ----------------------  $'
+
+	STOCK_R_SP_STR    DB 13,10,'         1 kg pack   -      $'
+	STOCK_R_MP_STR    DB 13,10,'         5 kg pack   -      $'
+	STOCK_R_LP_STR    DB 13,10,'        10 kg pack   -      $'
+	STOCK_R_UP_STR    DB 13,10, '        Unpack Rice  -      $'
+	TOTAL_ON_HAND_STR DB 13,10,'        -------------------------------- '
+			  DB 13,10,  '        TOTAL AMOUNT  :    $'            ;--in kg
+
+
+	RICE_CODE_SELECT_STR  DB 13,10,13,10,' Enter rice num to view its details :  R$'
+	RICE_CODE_MODIFY      DB 13,10,13,10,' Enter rice num for adding : R$'
+	RICE_CODE_SELECTION   DB 0
+	STOCK_R_WEIGHT_MODIFY DB 13,10,13,10,' Rice weight to add in kg : $'
+	STOCK_R_UPDATED_STR   DB 13,10,13,10,' Rice Weight Updated : '
+			      DB 13,10,'         $'
+	ST_R_CONFIRM_ADD_STR  DB 13,10,13,10," Confirm to add the amount? ('Y' to confirm) >> $"
+
+	BACK_ST_R_MENU DB 13,10,13,10," Back to Stock Report Menu? ('N' to exit) >>  $"
+
+	STATUS_STOCK_R   DB ?            ;Y,N
+	STATUS_STOCK_R1  DB ?            ;S,B
+	ST_R_CONFIRM_ADD DB ?      	 ;Y,N
+
+	;----empty space use for packed rice
+	SPACE_P_STOCK_R DB '               $'
+
+	RICE_WEIGHT_ADD DW 0
+	ST_R_INPUT1 DB 0
+	ST_R_INPUT2 DB 0
+	ST_R_BACK   DB 'N'
+
+	;----FOR SMALL PACK RICE (QTY)  
+	FR_SP_ON_HAND DW 650    
+	BA_SP_ON_HAND DW 650   
+	BR_SP_ON_HAND DW 650   
+	GL_SP_ON_HAND DW 650   
+	VE_SP_ON_HAND DW 650   
+
+	;----FOR BIG PACK RICE (QTY)   
+	FR_BP_ON_HAND DW 620  
+	BA_BP_ON_HAND DW 620   
+	BR_BP_ON_HAND DW 620   
+	GL_BP_ON_HAND DW 620   
+	VE_BP_ON_HAND DW 620   
+
+	;----FOR UNPACK RICE (kg) 
+	FR_UNP_ON_HAND DW 20000   ;--2000.0kg
+	BA_UNP_ON_HAND DW 20000    
+	BR_UNP_ON_HAND DW 20000    
+	GL_UNP_ON_HAND DW 20000   
+	VE_UNP_ON_HAND DW 20000   
+
+	STOCK_ON_HAND_SP  DW ?
+	STOCK_ON_HAND_BP  DW ?
+	STOCK_ON_HAND_UP  DW ?
+	STOCK_ON_HAND_P   DW ?
+	NEW_STOCK_ON_HAND DW 0
+
+	;----for store input add weight (STOCK REPORT)
+	ST_R_INPUT_W LABEL BYTE
+	MAX_ST_R_INPUT_W DB 4
+	NUM_ST_R_INPUT_W DB ?
+	ACT_ST_R_INPUT_W DB 4 DUP('$')
+
+	INPUT_WEIGHT_POSITION DW 1,10,100
+
+
+	;==========================FOR SUMMARY REPORT======================
+
+	SUM_R_MENU      DB 13,10,13,10, "------------------------------------"
+		        DB 13,10,"       DAILY SUMMARY REPORT          "
+		        DB 13,10,"------------------------------------$"
+	SUM_R_TRANS_STR DB 13,10,'       Total Transaction : $'
+	
+	SUM_R_MENU1 DB 13,10,13,10,"  1.  Packed Rice Sold"
+		    DB 13,10,"  2.  Unpacked Rice Sold"
+		    DB 13,10,"  3.  Total Rice Sold "
+		    DB 13,10,"  4.  Exit $"
+
+	SUM_R_P_RICE_TT DB 13,10,13,10,13,10,'                      PACKED RICE         '
+			DB 13,10,'                   ----------------       $'
+	SUM_R_UP_RICE_TT DB 13,10,13,10,13,10,'                      UNPACKED RICE         '
+			 DB 13,10,'                   ------------------       $'
+	SUM_R_TOTAL_RICE_TT DB 13,10,13,10,13,10,'                      TOTAL RICE SOLD         '
+			    DB 13,10,'                     -----------------       $'
+	SUM_R_RICE_HEADER DB 13,10
+			  DB 13,10,'    Type of Rice         Weight Sold       Price Earn '
+			  DB 13,10,'--------------------    --------------    ------------ $'
+
+	BACK_SUM_R_MENU DB 13,10,13,10," Back to Summary Report Menu? ('N' to exit) >>  $"
+
+	SPACE_P_SUM_R  DB '         $'
+	SPACE_UP_SUM_R DB '        $'
+
+	;---for packed in sum report
+	P_PRICE1 DW ?                ;--for small packed
+	P_PRICE2 DW ?
+
+	;----for total sold weight and price	
+	SUM_R_TT_SOLD_W         DW 0
+	SUM_R_TT_SOLD_P         DW 0
+	SUM_R_TT_SOLD_P_DECIMAL DB 0
