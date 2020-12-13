@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ProductDetailsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/productDetailsToolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pistachio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/productDetailsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/mr_farmer_small_logo"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/productPicture"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="15sp"
+            android:layout_marginRight="15sp"
+            android:layout_marginLeft="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/productDetailsToolbar"/>
+
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/productNameTitle"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginEnd="15sp"
+            app:layout_constraintStart_toEndOf="@id/productPicture"
+            app:layout_constraintTop_toBottomOf="@id/productDetailsToolbar"/>
+
+        <TextView
+            android:id="@+id/productPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/productPriceTitle"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginEnd="15sp"
+            app:layout_constraintStart_toEndOf="@id/productPicture"
+            app:layout_constraintTop_toBottomOf="@id/productName"/>
+
+        <TextView
+            android:id="@+id/productCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/productCategory"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginEnd="15sp"
+            app:layout_constraintStart_toEndOf="@id/productPicture"
+            app:layout_constraintTop_toBottomOf="@id/productPrice"/>
+
+        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+            android:id="@+id/numberOfProductAdded"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginEnd="15sp"
+            app:backGroundColor="@color/pistachio"
+            app:initialNumber="1"
+            app:textSize="8sp"
+            app:layout_constraintStart_toEndOf="@id/productPicture"
+            app:layout_constraintTop_toBottomOf="@id/productCategory">
+
+        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+
+        <ImageButton
+            android:id="@+id/removeFromWishListButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:backgroundTint="@color/white"
+            android:visibility="invisible"
+            android:src="@drawable/icon_wishlist_filled"
+            app:layout_constraintStart_toEndOf="@id/numberOfProductAdded"
+            app:layout_constraintBottom_toBottomOf="@id/numberOfProductAdded"/>
+
+        <ImageButton
+            android:id="@+id/wishListButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:backgroundTint="@color/white"
+            android:visibility="invisible"
+            android:src="@drawable/icon_wishlist"
+            app:layout_constraintStart_toEndOf="@id/numberOfProductAdded"
+            app:layout_constraintBottom_toBottomOf="@id/numberOfProductAdded"/>
+
+        <TextView
+            android:id="@+id/descTitle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginEnd="15sp"
+            android:text="@string/descTitle"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/numberOfProductAdded"/>
+
+        <TextView
+            android:id="@+id/productDescription"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginStart="15sp"
+            android:layout_marginEnd="25sp"
+            android:text="@string/productDescription"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/descTitle"/>
+
+        <Button
+            android:id="@+id/addToCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/pistachio"
+            android:text="@string/addToCart"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="15sp"
+            android:layout_marginStart="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,156 @@
+<resources>
+    <string name="app_name">Mr Farmer Grocer 2</string>
+    <string name="userNameTitle">User Name*</string>
+    <string name="name">Full Name*</string>
+    <string name="emailAddress">Email Address*</string>
+    <string name="password">Password*</string>
+    <string name="confirmPassword">Confirm Password*</string>
+
+
+    <string name="myAddresses">My Addresses</string>
+    <string name="wishList">Wishlist</string>
+    <string name="accountSettings">Account Settings</string>
+    <string name="orders">My Orders</string>
+    <string name="myAccount">My Account</string>
+    <string name="userName">Username*</string>
+
+    <string name="logOut">Log Out</string>
+    <string name="confirm_sign_up">Clicking the <b>SIGN UP</b> button means you agree with the terms and condition.</string>
+    <string name="submit">Submit</string>
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <string name="products">Products</string>
+    <string name="contact">Contact</string>
+    <string name="account">Account</string>
+    <string name="alreadyHaveAccount">Already Have an Account?</string>
+    <string name="addNewAddress">Add New Address</string>
+    <string name="more">More</string>
+    <string name="cancel">Cancel</string>
+    <string name="changePasswordWithUnderline"><u>Change Password</u></string>
+    <string name="changePasswordWithoutUnderline">Change Password</string>
+    <string name="allAddresses">My Addresses</string>
+    <string name="currentPassword">Current Password*</string>
+    <string name="newPassword">New Password*</string>
+    <string name="confirmNewPassword">Confirm New Password*</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="forgotPassword">Forgot Password?</string>
+    <string name="getResetLink">Reset Password</string>
+    <string name="addressTitle">Address:</string>
+    <string name="shopAddress">No.28, Jalan 2/116B, Kuchai Entreprenuers Park, Off Kuchai Lama, 58200 Kuala Lumpur</string>
+    <string name="mobileTitle">Mobile:</string>
+    <string name="shopMobile">+60 17-207 3921</string>
+    <string name="emailTitle">Email:</string>
+    <string name="shopEmail">hello@mrfarmergroup.com</string>
+    <string name="websiteTitle">Website:</string>
+    <string name="shopWebsite">www.mrfarmergrocer.com</string>
+
+    //Main Page
+    <string name="mainPageTitle">Fresh Supply Chain Platform</string>
+    <string name="joinNow">Join now</string>
+
+    //Log in Page
+    <string name="anAdmin">Im an Admin</string>
+    <string name="notAnAdmin">Im not an Admin</string>
+    <string name="signUp">Sign Up</string>
+    <string name="keepMeSignedIn">Keep Me Signed In</string>
+    <string name="logIn">Log In</string>
+
+
+    //Admin add new Products
+    <string name="enterProdName">Enter Product Name</string>
+    <string name="enterProdDescription">Enter Product Description</string>
+    <string name="enterProdPrice">Enter Product Price</string>
+
+    //Add New Address
+    <string name="enterRecipient">Recipient Name*:</string>
+    <string name="enterPhoneNum">Phone Num*:</string>
+    <string name="enterAddressDetails">Address Details*:</string>
+    <string name="enterPostalCode">Postal Code*:</string>
+    <string name="enterCity">City*:</string>
+    <string name="enterState">State*:</string>
+
+    <string name="changeProfilePic">Change Picture</string>
+
+    <string name="addToCart">Add To Cart</string>
+    <string name="descTitle">Product Details</string>
+    <string name="addToWishList">Wishlist</string>
+    <string name="productNameTitle">Product Name</string>
+    <string name="productPriceTitle">Product Price</string>
+    <string name="productDescription">Product Description</string>
+    <string name="productCategory">Category</string>
+
+    <string name="editCurrentAddress">Edit Current Address</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="subTotalTitle">SubTotal:</string>
+    <string name="shippingFeeTitle">Shipping Fee: RM10</string>
+    <string name="totalTitle">Total:</string>
+    <string name="subTotal">RMXXX.XX</string>
+    <string name="total">RMXXX.XX</string>
+    <string name="checkOut">Check Out</string>
+
+    <string name="vegetables">Vegetables</string>
+    <string name="seafood">Seafood</string>
+    <string name="egg">Egg</string>
+    <string name="chicken">Chicken</string>
+    <string name="categoryType">Vegetables and Fruits</string>
+    <string name="all">All</string>
+    <string name="myWishList">My Wish List</string>
+
+    <string name="prodName">Product Name</string>
+    <string name="search">Search</string>
+
+    <string-array name="category_array">
+        <item>vegetables</item>
+        <item>egg</item>
+        <item>chicken</item>
+        <item>seafood</item>
+    </string-array>
+
+    <string-array name="security_question">
+        <item>What is the city you born at?</item>
+        <item>What is your first surname?</item>
+        <item>What is the brand of your first car?</item>
+    </string-array>
+
+    <string name="noItemFound">Opps, No Item Available</string>
+    <string name="changePassword">Change Password</string>
+    <string name="answer">Answer*</string>
+
+    //Order ID
+    <string name="orderID">Order ID</string>
+    <string name="orderAddressTitle">Order Address/Billing Address</string>
+    <string name="orderAddressName">Name</string>
+    <string name="orderAddressPhoneNum">Phone Number</string>
+    <string name="orderAddressDetails">Address Details</string>
+    <string name="paid">Paid</string>
+    <string name="unpaid">Unpaid</string>
+    <string name="orderTotalPrice">Total</string>
+    <string name="orderTotalItem">Items</string>
+    <string name="orderTitle">All Orders</string>
+
+    <string name="totalSummary">Total Summary</string>
+    <string name="prodNum">Number:</string>
+    <string name="tolItemTitle">Total Item: </string>
+    <string name="selectAddressText">Select Address</string>
+    <string name="categoryTitle">Select Product Category</string>
+    <string name="selectPaymentMethod">Select Payment Method</string>
+    <string name="cardPayment">Credit/Debit card payment</string>
+
+    <string name="cardNumber">Card Number*</string>
+    <string name="monthExpire">M*</string>
+    <string name="yearExpire">Y*</string>
+    <string name="cvv">CVV*</string>
+    <string name="otp">OTP*</string>
+
+    <string name="pay">Pay</string>
+    <string name="paymentCondition">By clicking the pay button, I acknowledge that my card information is saved in  my Farmer Grocer account and One Time Password  might not be required for Transactions on Farmer  Grocer</string>
+
+    <string name="noItemInCart">Currently No Item in your cart</string>
+    <string name="noItemInWishList">Currently No Item in your wishlist</string>
+    <string name="noAddress">Currently No Address Available</string>
+    <string name="goToShop">Shop right now</string>
+</resources>

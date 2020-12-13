@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginRight="15sp"
+    android:layout_marginLeft="15sp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/adapterProdImage"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginTop="2dp"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/adapterProdName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/productNameTitle"
+            android:layout_below="@id/adapterProdImage"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/adapterProdPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/productPriceTitle"
+            android:layout_below="@id/adapterProdName"
+            android:textColor="@color/orange"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/adapterProdDescription"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@id/adapterProdPrice"
+            android:text="@string/productDescription"
+            android:visibility="invisible"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/adapterProdCategory"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@id/adapterProdDescription"
+            android:text="@string/productCategory"
+            android:visibility="invisible"
+            android:textSize="15sp"/>
+
+        <ImageButton
+            android:id="@+id/removeFromWishListButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_wishlist_filled"
+            android:layout_alignRight="@id/adapterProdName"
+            android:layout_below="@id/adapterProdImage"
+            android:backgroundTint="@color/white" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

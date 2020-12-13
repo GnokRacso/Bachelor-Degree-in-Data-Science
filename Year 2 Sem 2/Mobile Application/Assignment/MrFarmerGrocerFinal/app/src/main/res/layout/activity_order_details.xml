@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".OrderDetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/orderDetailsToolBar"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pistachio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/productDetailsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/mr_farmer_small_logo"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/orderDetailsToolBar"
+            android:fillViewport="true">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/orderProdOrderID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/orderID"
+                        android:textColor="@color/pistachio"
+                        android:textSize="20sp"
+                        android:layout_marginTop="10sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/orderProdAddressTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/orderAddressTitle"
+                        android:textColor="@color/grey"
+                        android:textSize="16sp"
+                        android:layout_below="@id/orderProdOrderID"/>
+
+                    <LinearLayout
+                        android:id="@+id/orderProdAddressView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_below="@id/orderProdAddressTitle">
+
+                        <TextView
+                            android:id="@+id/orderProdReciName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/orderAddressName"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/orderProdAddressTitle"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginStart="5sp"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/orderProdPhoneNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/orderAddressPhoneNum"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/orderProdReciName"
+                            android:layout_marginStart="5sp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/orderProdAddressDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/orderAddressDetails"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/orderProdPhoneNum"
+                            android:layout_marginStart="5sp"
+                            android:textColor="@color/grey"
+                            android:textSize="13sp"/>
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/orderSummaryView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="10sp"
+                        android:layout_below="@id/orderProdAddressTitle"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/orderProdTotalSummaryTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/totalSummary"
+                            android:textColor="@color/black"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="20sp"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/orderProdSubtotalTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/subTotalTitle"
+                            android:layout_below="@+id/orderProdTotalSummaryTitle"
+                            android:layout_toStartOf="@id/orderProdSubtotalPrice"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/orderProdSubtotalPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/subTotal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="20sp"
+                            android:layout_below="@+id/orderProdTotalSummaryTitle"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/orderProdShippingTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/shippingFeeTitle"
+                            android:layout_marginEnd="20sp"
+                            android:layout_below="@+id/orderProdSubtotalPrice"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/orderProdTolTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/totalTitle"
+                            android:layout_below="@+id/orderProdShippingTitle"
+                            android:layout_toStartOf="@id/orderProdTotalPrice"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/orderProdTotalPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/total"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="20sp"
+                            android:layout_below="@+id/orderProdShippingTitle"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"/>
+
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/orderProdsRecycleView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:clipToPadding="false"
+                        android:layout_marginTop="10sp"
+                        android:layout_below="@id/orderProdAddressView">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </ScrollView>
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+</layout>
+

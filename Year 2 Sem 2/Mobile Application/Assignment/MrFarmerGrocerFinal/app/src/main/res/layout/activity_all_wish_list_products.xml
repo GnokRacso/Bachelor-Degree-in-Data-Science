@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AllWishListProductsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/productsToolBar"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pistachio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/productDetailsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/mr_farmer_small_logo"/>
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/wishListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/myWishList"
+            android:layout_below="@id/productsToolBar"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10sp"
+            android:textColor="@color/black"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/wishListProdRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:clipToPadding="false"
+            android:layout_marginTop="10sp"
+            android:layout_below="@id/wishListTitle">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/noItemInWishListText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/noItemInWishList"
+            android:layout_marginEnd="10sp"
+            android:layout_marginBottom="5sp"
+            android:textSize="20sp"
+            android:textColor="@color/pistachio"
+            android:visibility="invisible"
+            android:layout_above="@id/goToShoppingButton"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/goToShoppingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goToShop"
+            app:backgroundTint="@color/pistachio"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+</layout>
+

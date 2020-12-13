@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".PaymentActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/paymentToolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pistachio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/productDetailsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/mr_farmer_small_logo"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/selectPaymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/selectPaymentMethod"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@drawable/rect_border"
+            android:layout_marginTop="10sp"
+            android:layout_marginEnd="5sp"
+            android:layout_marginStart="5sp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/paymentToolbar"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/orderSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="5sp"
+            android:layout_marginStart="5sp"
+            app:layout_constraintTop_toBottomOf="@id/selectPaymentMethod"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/orderSummaryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/totalSummary"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp"/>
+
+            <TextView
+                android:id="@+id/subTotalTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subTotalTitle"
+                android:layout_below="@id/orderSummaryTitle"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp"/>
+
+            <TextView
+                android:id="@+id/subTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subTotal"
+                android:layout_below="@id/orderSummaryTitle"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:id="@+id/shippingTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shippingFeeTitle"
+                android:layout_below="@id/subTotalTitle"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp"/>
+
+            <TextView
+                android:id="@+id/totalTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/totalTitle"
+                android:layout_below="@id/shippingTitle"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp"/>
+
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subTotal"
+                android:layout_below="@id/shippingTitle"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/paymentSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30sp"
+            android:layout_marginEnd="5sp"
+            android:layout_marginStart="5sp"
+            app:layout_constraintTop_toBottomOf="@id/orderSummary"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/visaIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/icon_visa"/>
+
+            <ImageView
+                android:id="@+id/masterCardIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/icon_mastercard"
+                android:layout_marginStart="10sp"
+                android:layout_toEndOf="@id/visaIcon"/>
+
+            <TextView
+                android:id="@+id/cardPaymentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cardPayment"
+                android:layout_below="@id/masterCardIcon"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cardNumberInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cardNumber"
+                android:layout_marginTop="30sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="30sp"
+                app:endIconMode="clear_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_below="@id/cardPaymentTitle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="16"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cardMonthInput"
+                android:layout_width="80sp"
+                android:layout_height="wrap_content"
+                android:hint="@string/monthExpire"
+                android:layout_marginStart="10sp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_below="@id/cardNumberInput">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="2"
+                    android:singleLine="true"
+                    android:inputType="number"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cardYearInput"
+                android:layout_width="80sp"
+                android:layout_height="wrap_content"
+                android:hint="@string/yearExpire"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_below="@id/cardNumberInput"
+                android:layout_toEndOf="@id/cardMonthInput">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="2"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cardCVVInput"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:hint="@string/cvv"
+                android:layout_marginEnd="30sp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_toEndOf="@id/cardYearInput"
+                android:layout_below="@id/cardNumberInput">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cardOTPReceive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/otp"
+                android:layout_marginEnd="30sp"
+                android:layout_marginStart="10sp"
+                android:visibility="invisible"
+                app:endIconMode="clear_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_below="@id/cardMonthInput">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/paymentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pay"
+                app:backgroundTint="@color/pistachio"
+                android:layout_below="@id/cardOTPReceive"/>
+
+            <Button
+                android:id="@+id/paymentAfterOTPButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pay"
+                android:visibility="invisible"
+                app:backgroundTint="@color/pistachio"
+                android:layout_below="@id/cardOTPReceive"/>
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                app:backgroundTint="@color/pistachio"
+                android:layout_below="@id/cardOTPReceive"
+                android:layout_toEndOf="@id/paymentButton"
+                android:layout_marginStart="10sp"/>
+
+            <TextView
+                android:id="@+id/cardTermsAndCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/paymentCondition"
+                android:textColor="@color/grey"
+                android:layout_below="@id/paymentButton"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

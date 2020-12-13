@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AllAddressActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/userAddressesToolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pistachio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/all_addresses_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/allAddresses"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addressRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        android:clipToPadding="false"
+        android:layout_above="@id/buttons"
+        android:layout_below="@id/userAddressesToolbar">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/noAddressAvailable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/noAddress"
+        android:layout_marginEnd="10sp"
+        android:layout_marginBottom="5sp"
+        android:textSize="20sp"
+        android:textColor="@color/pistachio"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/addNewAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:text="@string/addNewAddress"
+            android:backgroundTint="@color/pistachio"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+
+

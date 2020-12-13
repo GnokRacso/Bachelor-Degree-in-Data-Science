@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="5sp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/deliveryName"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/deliveryPhoneNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:text="Phone Number"
+            android:textSize="15sp"
+            android:layout_below="@id/deliveryName"/>
+
+        <TextView
+            android:id="@+id/deliveryAddressDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Address Details"
+            android:textSize="15sp"
+            android:layout_below="@id/deliveryPhoneNum"/>
+
+        <TextView
+            android:id="@+id/deliveryPostalCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Postal Code"
+            android:textSize="15sp"
+            android:layout_below="@id/deliveryAddressDetails"/>
+
+        <TextView
+            android:id="@+id/deliveryCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="City"
+            android:textSize="15sp"
+            android:layout_below="@id/deliveryPostalCode"/>
+
+        <TextView
+            android:id="@+id/deliveryState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="State"
+            android:textSize="15sp"
+            android:layout_below="@id/deliveryCity"/>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

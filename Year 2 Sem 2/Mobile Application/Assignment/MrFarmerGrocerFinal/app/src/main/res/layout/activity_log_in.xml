@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LogInActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/log_in_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="25dp"
+            android:textColor="@color/grey"
+            android:text="@string/logIn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userName_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/userNameTitle"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginRight="30sp"
+            android:layout_marginLeft="30sp"
+            app:startIconDrawable="@drawable/icon_account_outline"
+            app:endIconMode="clear_text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/log_in_word">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="30sp"
+            android:layout_marginLeft="30sp"
+            app:startIconDrawable="@drawable/icon_password"
+            app:endIconMode="password_toggle"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userName_input">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:imeOptions="actionDone"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/forgotPasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgotPassword"
+            android:textColor="@color/blue"
+            android:textSize="10sp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:layout_constraintEnd_toEndOf="@id/password_input"
+            app:layout_constraintTop_toBottomOf="@id/password_input"/>
+
+        <CheckBox
+            android:id="@+id/checkboxRememberMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/keepMeSignedIn"
+            app:layout_constraintStart_toStartOf="@id/password_input"
+            app:layout_constraintTop_toBottomOf="@id/password_input" />
+
+        <Button
+            android:id="@+id/sign_up_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/signUp"
+            android:backgroundTint="@color/pistachio"
+            android:layout_marginBottom="20sp"
+            android:layout_marginLeft="30sp"
+            android:layout_marginRight="30sp"
+            app:layout_constraintStart_toStartOf="@id/checkboxRememberMe"
+            app:layout_constraintTop_toBottomOf="@id/checkboxRememberMe"/>
+
+        <Button
+            android:id="@+id/log_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logIn"
+            android:backgroundTint="@color/pistachio"
+            android:layout_marginTop="20sp"
+            android:layout_marginLeft="30sp"
+            android:layout_marginRight="30sp"
+            app:layout_constraintStart_toStartOf="@id/sign_up_button"
+            app:layout_constraintTop_toBottomOf="@id/sign_up_button"/>
+
+        <Button
+            android:id="@+id/anAdminButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/anAdmin"
+            android:textColor="@color/blue"
+            android:textSize="15sp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:layout_constraintEnd_toEndOf="@id/password_input"
+            app:layout_constraintTop_toBottomOf="@id/log_in_button"/>
+
+        <Button
+            android:id="@+id/notAnAdminButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notAnAdmin"
+            android:textColor="@color/blue"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:layout_constraintEnd_toEndOf="@id/password_input"
+            app:layout_constraintTop_toBottomOf="@id/log_in_button"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginTop="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/log_in_button"
+            style="@android:style/Widget.ProgressBar.Small"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

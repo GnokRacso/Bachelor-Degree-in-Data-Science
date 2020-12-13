@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/orderAdapterOrderID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/orderID"
+            android:textColor="@color/pistachio"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/orderAdapterAddressTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/orderAddressTitle"
+            android:layout_below="@id/orderAdapterOrderID"
+            android:textColor="@color/grey"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/orderAdapterDeliName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/orderAddressName"
+            android:layout_below="@id/orderAdapterAddressTitle"
+            android:textColor="@color/black"
+            android:layout_marginTop="10sp"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/orderAdapterPhoneNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/orderAddressPhoneNum"
+            android:layout_below="@id/orderAdapterDeliName"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/orderAdapterAddressDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/orderAddressDetails"
+            android:layout_below="@id/orderAdapterPhoneNum"
+            android:textColor="@color/grey"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/orderAdapterOrderTotalItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tolItemTitle"
+            android:layout_toStartOf="@id/orderAdapterOrderTotalItem"
+            android:layout_below="@id/orderAdapterDeliName"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+
+        <TextView
+            android:id="@+id/orderAdapterOrderTotalItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/orderTotalItem"
+            android:layout_marginEnd="20sp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/orderAdapterDeliName"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/orderAdapterOrderTolPriceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/totalTitle"
+            android:layout_toStartOf="@id/orderAdapterOrderTotal"
+            android:layout_below="@id/orderAdapterPhoneNum"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/orderAdapterOrderTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/orderTotalPrice"
+            android:layout_marginEnd="20sp"
+            android:layout_below="@id/orderAdapterPhoneNum"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
