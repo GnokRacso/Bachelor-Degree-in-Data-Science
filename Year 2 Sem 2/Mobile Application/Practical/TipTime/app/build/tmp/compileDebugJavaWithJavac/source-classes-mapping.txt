@@ -1,0 +1,4 @@
+com/example/tiptime/databinding/ActivityMainBinding.java
+ com.example.tiptime.databinding.ActivityMainBinding
+com/example/tiptime/BuildConfig.java
+ com.example.tiptime.BuildConfig
