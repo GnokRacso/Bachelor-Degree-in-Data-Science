@@ -1,0 +1,44 @@
+-- TRIM(xxx) : to remove leading spaces
+
+DECLARE
+    v_name varchar2(30) := 'Joe Bloggs';
+    v_job varchar2(20) := 'Contractor';
+    v_pay number := 52657.3;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_name);
+    DBMS_OUTPUT.PUT_LINE('Job:           ' || v_job);
+    DBMS_OUTPUT.PUT_LINE('Total Pay:     ' || TRIM(TO_CHAR(v_pay, '$999G999G999D99')));
+END;
+/
+
+
+
+
+/* LPAD (left pad) and RPAD (right pad) are SQL functions used to 
+add padding characters to the left or right side of a string up to a 
+given length. The default padding character is a space. 
+If the string's length is greater than the required length, it will be trimmed 
+(excess characters will be removed).
+eg:
+
+SELECT productcode,buyprice, LPAD(buyprice, 12, '*') result
+FROM products;
+
+*/
+
+
+begin
+   DBMS_OUTPUT.PUT_LINE(RPAD(Prod_cursor%rowcount,3,' ')||' '||
+                        RPAD(Prod_rec.ProductCode,15,' ')||' '||
+                        RPAD(Prod_rec.ProductName,70,' ')||
+                        to_char(Prod_rec.MSRP,'$99,999.99')||'   '||
+                        to_char(Prod_rec.quantityInStock,'9,999')
+  
+END;
+/
+-- Report Design
+--No. Product Code     Product Name                                                          MSRP       Stock Qty
+--=== =============== ====================================================================== ========== =========
+--999 XXXXXXXXXXXXXXX XX------------------------------------------------------------------XX $99,999.99   9,999
+----  12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+--             1         2         3         4         5         6         7         8         9         10

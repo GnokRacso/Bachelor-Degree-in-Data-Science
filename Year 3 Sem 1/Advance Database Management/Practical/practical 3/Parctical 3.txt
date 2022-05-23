@@ -1,0 +1,104 @@
+---To check every table in DB---
+select table_name from user_tables;
+
+---Update the date of the orders---
+update orders set orderdate = add_months(orderdate, 193), 
+requireddate = add_months(requireddate, 193), 
+shippeddate = add_months(shippeddate, 193);
+
+---PL/SQL procedure format----
+DECLARE
+	variable1 DATE;
+	variable2 number(5,2);
+	variable3 varchar2(15);
+	v_day_num number(1);
+BEGIN 
+	variable1 := sysdate;
+	variable2 := 123.45;
+	variable3 := user;
+	v_day_num := to_char(sysdate,'D');
+
+	DBMS_OUTPUT.PUT_LINE('Today is '||variable1);
+	DBMS_OUTPUT.PUT_LINE('I have RM '||variable2);
+	DBMS_OUTPUT.PUT_LINE('Nice to meet you '||variable3);
+
+	if v_day_num >5 then	 
+	  DBMS_OUTPUT.PUT_LINE('Have a nice weekend');
+	else	  
+	  DBMS_OUTPUT.PUT_LINE('Hope you are looking forward to the weekend');
+	end if;
+END;
+/
+
+---If Else statement example---
+DECLARE
+    v_date DATE := TO_DATE('&sv_user_date', 'DD-MON-YYYY');
+   v_day VARCHAR2(15);
+BEGIN
+  v_day := RTRIM(TO_CHAR(v_date, 'DAY'));
+  --v_day := (TO_CHAR(v_date, 'DAY'));
+     IF v_day IN ('SATURDAY', 'SUNDAY') THEN
+             DBMS_OUTPUT.PUT_LINE (v_date||' falls on weekend');
+   END IF; 
+   DBMS_OUTPUT.PUT_LINE ('Done...');
+END;
+/
+
+---store Procedure---
+create table Price_Audit
+(  IN_Product_Id   varchar2(15),
+   v_productname varchar2(70),
+   v_oldprice          number(7,2),
+   v_newprice        number(7,2),
+   user_name 	   varchar2(20),
+   date_change     date
+);
+
+CREATE OR REPLACE PROCEDURE PRC_PRICE_INCR(IN_Product_Code IN VARCHAR2) IS 
+	v_productname varchar2(70); 
+	v_oldprice number(7,2); 
+	v_newprice number(7,2); 
+BEGIN 
+-- GET THE PRODUCT PRICE 
+	SELECT ProductName, MSRP INTO v_productname, v_oldprice 
+	FROM PRODUCTS 
+	WHERE ProductCode = IN_Product_Code; 
+		v_newprice := round(v_oldprice *1.1,2); 
+-- UPDATE the record 
+	UPDATE PRODUCTS 
+		SET MSRP = v_newprice 
+		WHERE ProductCode = IN_Product_Code; 
+-- WRITE DATA TO THE PRICE_AUDIT TABLE 
+	INSERT INTO Price_Audit VALUES(IN_Product_Code, v_productname, v_oldprice, v_newprice, USER, SYSDATE); 
+
+	DBMS_OUTPUT.PUT_LINE('Product '||IN_Product_Code||' '||v_productname|| ' new price is $' ||v_newprice); 
+END;
+/
+
+select productcode from products;
+exec prc_price_incr('S18_1889')
+select * from price_audit;
+
+---Exception Statement----
+create or replace procedure prc_customer_purchase(cust_num in number) is 
+	v_purchase varchar2(3):='NO'; 
+BEGIN 
+	DBMS_OUTPUT.PUT_LINE ('Check if the customer has made any purchases'); 
+	SELECT 'YES' 
+	INTO v_purchase 
+	FROM orders 
+	WHERE customernumber = cust_num; 
+
+	DBMS_OUTPUT.PUT_LINE ('The customer has only made 1 purchase.'); 
+	EXCEPTION 
+	WHEN NO_DATA_FOUND 
+	THEN 
+	DBMS_OUTPUT.PUT_LINE ('The customer has not made any purchases'); 
+
+	WHEN TOO_MANY_ROWS 
+	THEN 
+	DBMS_OUTPUT.PUT_LINE ('The customer has made more than 1 purchases.'); 
+END;
+/
+
+exec prc_customer_purchase(447)

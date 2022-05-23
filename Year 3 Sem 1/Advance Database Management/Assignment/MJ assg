@@ -1,0 +1,63 @@
+assg/kmj@localhost:1521/xepdb1
+
+Operational - Staff who want to take MC / Staff who late
+Tactical - Number of late per staff, to be penalised
+Strategic - Comparison of number of getting MC or OL per staff with previous month
+
+Procedure 1 - staff to upgrade position & salary
+Procedure 2 - staff to log in for work, log out work
+
+Trigger 2 - Staff that late to work, +1 in late record
+Trigger 3 - record delete every month
+
+
+DROP TABLE STAFF_POSITION;
+CREATE TABLE STAFF_POSITION(
+    staffPost  varchar2(30) NOT NULL,
+    postSalary number(6)    NOT NULL,
+    PRIMARY KEY(staffPost)
+);
+
+DROP TABLE STAFF;
+CREATE TABLE STAFF (
+   staffID     char(5)     NOT NULL,
+   staffName   varchar2(30) NOT NULL,
+   staffIC     char(12)   NOT NULL,
+   staffEmail  varchar2(50) NOT NULL,
+   staffPost   varchar2(30) NOT NULL,
+   PRIMARY KEY(staffID),
+   CONSTRAINT chk_staffEmail CHECK (staffEmail LIKE '%_@tarc.edu.my%'),
+   FOREIGN KEY(staffPost) REFERENCES STAFF_POSITION(staffPost)
+);
+
+DROP TABLE STAFF_ACTIVITY_STATUS;
+ALTER SESSION SET NLS_TIMESTAMP_FORMAT='YYYY-MM-DD HH24:MI:SS';
+ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD';
+CREATE TABLE STAFF_ACTIVITY_STATUS (
+    recordNo     number(9),
+    staffStatus  char(3)    NOT NULL,
+    workDate     date       DEFAULT ON NULL SYSDATE,
+    staffLogIn   timestamp  DEFAULT ON NULL '9999-12-31 00:00:00',
+    staffLogOut  timestamp  DEFAULT ON NULL '9999-12-31 00:00:00',
+    staffID      char(5)    NOT NULL,
+    PRIMARY KEY (recordNo),
+    CONSTRAINT chk_staffStatus CHECK (staffStatus IN ('IN', 'OUT', 'MC', 'OL')),
+    FOREIGN KEY (staffID) REFERENCES STAFF(staffID)
+);
+
+
+DROP TABLE STAFF_SALARY;
+CREATE TABLE STAFF_SALARY(
+    staffID    char(5)      NOT NULL,
+    salaryNum  number(8,2)  NOT NULL,
+    lateNum    number(2)    NOT NULL,
+    lateFine   number(6,2)  NOT NULL,
+    PRIMARY KEY(staffID),
+    FOREIGN KEY(staffID) REFERENCES STAFF(staffID)
+);
+
+
+INSERT INTO STAFF_ACTIVITY_STATUS VALUES('', 'OUT', '2021-08-28', '2021-08-28 08:25:34', '2021-08-28 18:25:51', 'ST001');
+INSERT INTO STAFF_ACTIVITY_STATUS VALUES('', 'OUT', '2021-08-28', '2021-08-28 08:35:34', '2021-08-28 18:25:51', 'ST002');
+INSERT INTO STAFF_ACTIVITY_STATUS VALUES('', 'MC', '', '', '', 'ST005');
+INSERT INTO STAFF_ACTIVITY_STATUS VALUES('', 'OL', '', '', '', 'ST005');

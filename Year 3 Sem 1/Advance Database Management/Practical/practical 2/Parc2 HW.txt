@@ -1,0 +1,74 @@
+CREATE TABLE branch(
+branchNo       number(4) NOT NULL,
+street         varchar2(20),
+city           varchar2(20),
+postCode       number(5),
+branchTelNo    varchar2(14),
+rental         number(9,2),
+PRIMARY KEY(branchNo)
+);
+
+CREATE TABLE mechanic(
+mechanicId     number(4) NOT NULL,
+mechanicName   varchar2(20),
+mecAddress     varchar2(30),
+qualification  varchar2(30),
+branchNo       number(4),
+salary         number(7,2) NOT NULL check (salary BETWEEN 20000.00 and 60000.00),
+PRIMARY KEY (mechanicID),
+FOREIGN KEY (branchNo) REFERENCES branch (branchNo) 
+);
+
+CREATE TABLE vehicle(
+vehicleNo    varchar2(7) NOT NULL,
+vehicleType  varchar2(20),
+model        varchar2(20),
+makeYear     number(4),
+colour       varchar2(20),
+PRIMARY KEY(vehicleNo)
+);
+
+CREATE TABLE jobdone(
+jobNo 	    NUMBER(4) NOT NULL, 
+jDate 	    DATE NOT NULL, 
+vehicleNo   VARCHAR2(7) NOT NULL, 
+mechanicId  NUMBER(4) NOT NULL, 
+workDone    VARCHAR2(50), 
+charges     NUMBER(7,2), 
+constraint min_charges check(charges >= 25),
+constraint pk_JobDone PRIMARY KEY (jobNo),
+constraint fk_Jobdone_Mechanic FOREIGN KEY (mechanicId) REFERENCES mechanic (mechanicId)
+);
+
+---Activity 3---
+SELECT branch.branchno, count(charges)
+FROM jobdone, mechanic, branch
+WHERE jobdone.MechanicId = mechanic.MechanicId AND branch.BranchNo = mechanic.BranchNo
+GROUP BY branch.branchno;
+
+SELECT branch.branchno, sum(charges)
+FROM jobdone, mechanic, branch
+WHERE jobdone.MechanicId = mechanic.MechanicId AND branch.BranchNo = mechanic.BranchNo
+GROUP BY branch.branchno;
+
+---Activity 4---
+select m.mechanicid, m.mechanicname, count(j.charges), sum(j.charges)
+from jobdone j, mechanic m
+where j.mechanicid = m.mechanicid
+group by m.mechanicid, m.mechanicname;
+
+---Activity 5---
+SELECT M.MECHANICID, MECHANICNAME, COUNT(JOBNO) AS NO_OF_JOB, SUM(J.CHARGES) AS TOTAL_CHARGES 
+FROM JOBDONE J, MECHANIC M
+WHERE M.MECHANICID = J.MECHANICID 
+GROUP BY M.MECHANICID, M.MECHANICNAME
+HAVING COUNT(JOBNO) >3
+ORDER BY 1;
+
+---Activity 6---
+select v.vehicleno, v.vehicletype, m.mechanicname, j.jdate
+from mechanic m, vehicle v, jobdone j
+where j.mechanicid = m.mechanicid
+and j.vehicleno = v.vehicleno
+and m.mechanicname = 'Mutusamy Raj'
+and (TO_CHAR(j.jdate, 'YYYY-MM') between '2020-01' and '2020-05');

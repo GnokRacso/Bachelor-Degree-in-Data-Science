@@ -1,0 +1,24 @@
+Procedure 1
+-Valid Input
+-- exec PCR_STAFF_STATUS('ST001', 'IN');
+-- select * from staff_activity_status where staffid = 'ST001' and workdate = sysdate;
+
+-Invalid Staff
+-- exec PCR_STAFF_STATUS('ST027', 'IN');
+
+-Invalid Status
+-- exec PCR_STAFF_STATUS('ST002', 'ON');
+
+Procedure 2
+-Valid Input
+-- exec PCR_STAFF_CHANGE_POSITION('ST001', 'Clerk');
+-- select * from staff where staffid = 'ST001';
+
+-Invalid staff
+-- exec PCR_STAFF_CHANGE_POSITION('ST027', 'Clerk');
+
+-Invalid position
+-- exec PCR_STAFF_CHANGE_POSITION('ST001', 'CEO');
+
+Report
+- exec PRC_SALARY_REPORT;

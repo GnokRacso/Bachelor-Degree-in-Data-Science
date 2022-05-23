@@ -1,0 +1,65 @@
+CREATE OR REPLACE PROCEDURE PRC_SALARY_REPORT IS
+    CURSOR STAFFPOSITION_CURSOR IS
+        SELECT DISTINCT SP.STAFFPOST 
+        FROM STAFF_POSITION SP;
+
+    CURSOR STAFF_CURSOR(V_STAFFPOSITION VARCHAR2) IS 
+        SELECT S.STAFFID, S.STAFFNAME, SS.SALARYNUM, SS.LATENUM,
+               SS.LATEFINE, (SS.SALARYNUM - SS.LATEFINE) AS FINALPAY
+        FROM STAFF S, STAFF_SALARY SS
+        WHERE S.STAFFID = SS.STAFFID AND
+              S.STAFFPOST = V_STAFFPOSITION
+        GROUP BY S.STAFFID, S.STAFFNAME, SS.SALARYNUM, 
+                 SS.LATENUM, SS.LATEFINE
+        ORDER BY S.STAFFID ASC;
+    
+    TotalLateFine NUMBER(7,2) := 0;
+    TotalStaffLate NUMBER(3) := 0;
+    TotalSalary NUMBER(11,2) := 0;
+
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE(CHR(10));
+        DBMS_OUTPUT.PUT_LINE('* ' || LPAD('==========================', 60, ' '));
+        DBMS_OUTPUT.PUT_LINE('* ' || LPAD('LATEST STAFF SALARY REPORT', 60, ' '));
+        DBMS_OUTPUT.PUT_LINE('* ' || LPAD('==========================', 60, ' '));
+        DBMS_OUTPUT.PUT_LINE(RPAD('* DATE', 10, ' ') || ' : ' || TO_CHAR(SYSDATE, 'YYYY-MM-DD'));
+        DBMS_OUTPUT.PUT_LINE(RPAD('* TIME', 10, ' ') || ' : ' || TO_CHAR(SYSTIMESTAMP, 'HH24:MI:SS'));
+        DBMS_OUTPUT.PUT_LINE(RPAD('* DAY ', 10, ' ') || ' : ' || TO_CHAR(SYSDATE, 'DAY'));
+        DBMS_OUTPUT.PUT_LINE(CHR(10));
+
+        FOR STAFFSALARY_RECORD IN STAFFPOSITION_CURSOR LOOP
+            DBMS_OUTPUT.PUT_LINE(CHR(10));
+            DBMS_OUTPUT.PUT_LINE('* STAFF POSITION : ' || STAFFSALARY_RECORD.STAFFPOST);
+            DBMS_OUTPUT.PUT_LINE(RPAD('=', 110, '='));
+            DBMS_OUTPUT.PUT_LINE(RPAD('* ID', 10, ' ') || RPAD('NAME', 50, ' ') ||
+                                 RPAD('SALARY', 15, ' ') || RPAD('LATE time', 10, ' ') ||
+                                 RPAD('LATE FINE', 15, ' ') || RPAD('TOTAL ', 20, ' '));
+            DBMS_OUTPUT.PUT_LINE(RPAD('=', 110, '='));
+
+            TotalStaffLate := 0;
+            TotalLateFine := 0;
+            TotalSalary := 0;
+
+            FOR STAFF_RECORD IN STAFF_CURSOR (STAFFSALARY_RECORD.STAFFPOST)
+            LOOP
+                DBMS_OUTPUT.PUT_LINE(RPAD(STAFF_RECORD.STAFFID, 10, ' ') || 
+                                     RPAD(STAFF_RECORD.STAFFNAME, 50, ' ') ||
+                                     RPAD(TRIM(TO_CHAR(STAFF_RECORD.SALARYNUM, '999G999D99')), 15, ' ') ||
+                                     RPAD(STAFF_RECORD.LATENUM, 10, ' ') ||
+                                     RPAD(TRIM(TO_CHAR(STAFF_RECORD.LATEFINE, '999G999D99')), 15, ' ') ||
+                                     RPAD(TRIM(TO_CHAR(STAFF_RECORD.FINALPAY, '999G999D99')), 20, ' '));
+
+                TotalStaffLate := TotalStaffLate + STAFF_RECORD.LATENUM;
+                TotalLateFine := TotalLateFine + STAFF_RECORD.LATEFINE;
+                TotalSalary := TotalSalary + STAFF_RECORD.FINALPAY;
+            END LOOP;
+
+            DBMS_OUTPUT.PUT_LINE(RPAD('=', 110, '='));
+            DBMS_OUTPUT.PUT_LINE(RPAD('* ', 75, ' ') || 
+                                 RPAD(TotalStaffLate, 10, ' ') ||
+                                 RPAD(TRIM(TO_CHAR(TotalLateFine, '999G999D99')), 15, ' ') ||
+                                 RPAD(TRIM(TO_CHAR(TotalSalary, '999G999D99')), 20, ' '));
+            DBMS_OUTPUT.PUT_LINE(RPAD('=', 110, '='));
+        END LOOP;
+END;
+/

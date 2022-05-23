@@ -1,0 +1,72 @@
+----CURSOR FOR LOOP & Parameter-------
+DECLARE
+    CURSOR order_cursor (in_year NUMBER :=2020 , in_customer NUMBER := 141)  IS
+        SELECT o.ordernumber, orderdate,  SUM(quantityOrdered * priceEach) Total
+        FROM orderDetails d, orders o
+        where d.orderNumber = o.orderNumber 
+        AND status = 'Shipped' 
+        AND EXTRACT( YEAR FROM orderDate) = in_year
+        AND customernumber = in_customer
+        group by o.ordernumber, orderdate;
+    totalAmt number(11,2) :=0;
+BEGIN
+   FOR cust_order IN order_cursor LOOP
+        dbms_output.put_line(cust_order.ordernumber||'   '|| cust_order.orderdate ||  '   '||cust_order.Total);
+        totalAmt := totalAmt + cust_order.Total;
+    END LOOP;
+    dbms_output.put_line(RPAD('-',50,'-'));
+    dbms_output.put_line(chr(10)||'Total amount of purchase is '|| 
+        to_char( totalAmt, '$999,999,999.99'));
+  END;
+/
+
+DECLARE
+        CURSOR c_product (low_price NUMBER, high_price NUMBER) IS
+        SELECT *
+        FROM products
+        WHERE msrp BETWEEN low_price AND high_price;
+BEGIN
+    dbms_output.put_line('Mass products: ');
+    for prod_rec in c_product(30,90) loop 
+           dbms_output.put_line(prod_rec.productName || ': ' ||prod_rec.msrp);
+    END LOOP;
+    
+    dbms_output.put_line(chr(10)|| chr(10)||'Luxury products: ');
+    for prod_rec in c_product(150,1000) loop 
+           dbms_output.put_line(prod_rec.productName || ': ' ||prod_rec.msrp);
+     END LOOP;
+END;
+/
+
+---UPDATE WITH CURSOR----
+create or replace procedure prc_adjust_creditlimit as
+   CURSOR c_customers IS 
+         SELECT customernumber, 
+               customername, creditlimit
+         FROM customers  
+         WHERE creditlimit > 0 
+         order by customernumber
+        FOR UPDATE OF creditlimit;
+v_count number := 0;
+v_inc  number := 0;
+BEGIN
+    FOR custRec IN c_customers  LOOP
+        SELECT COUNT(*) INTO v_count  FROM orders
+        WHERE customernumber =custRec.customernumber;
+        IF v_count >= 5 THEN   
+           v_inc:= 5;
+        ELSIF v_count between 2 and 4 THEN   
+           v_inc := 2;
+        ELSE  v_inc := 0;
+        END IF;
+IF v_inc > 0 THEN
+            UPDATE  customers
+            SET        creditlimit = creditlimit * ( 1 +  v_inc/ 100)
+            WHERE customernumber = custRec.customernumber;
+           dbms_output.put_line('Increase credit for customer ' ||  
+            custRec.customernumber || ' ' ||custRec.customername                
+               || ' by ' || v_inc || '%' );
+        END IF;
+    END LOOP;
+END;
+/

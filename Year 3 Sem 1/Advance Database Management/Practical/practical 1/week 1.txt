@@ -1,0 +1,47 @@
+sys/<12345678> as sysdba
+select name, open_mode from v$pdbs; 
+
+--create tablespace
+
+select name from v$database;
+select tablespace_name from dba_tablespaces;
+
+create bigfile tablespace adm
+datafile 'C:\app\Dell\product\18.0.0\oradata\XE\XEPDB1\adm.dbf'
+size 200m autoextend on; 
+
+-connect to pdb
+alter session set container=xepdb1;
+
+*******************************************************************************************
+--create a role
+
+create role adm_role;
+
+grant 
+      create session,
+      resource,
+      create any index, 
+      create view to adm_role;
+
+select * 
+from role_sys_privs 
+where role = 'ADM_ROLE';
+
+*******************************************************************************************
+--create user and granting system privileges
+
+create user abc
+identified by abc
+default tablespace ADM1
+temporary tablespace temp 
+account unlock; 
+
+grant unlimited tablespace to abc;
+grant adm_role to abc;
+
+-- Connect to the user account created
+connect abc/abc@localhost:1521/xepdb1
+show user 
+show con_name 
+

@@ -1,0 +1,7 @@
+start c:\customers.txt
+start c:\employees.txt
+start c:\offices.txt
+start c:\products.txt
+start c:\productlines.txt
+start c:\orderdetails.txt
+start c:\orders.txt
