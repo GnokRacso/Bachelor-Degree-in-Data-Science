@@ -1,0 +1,6 @@
+Exercise: Computer Vision Notebook
+This notebook implements calls to the computer-vsion api based on a key and endpoint you configure in azure. This notebook asks for content categories, a description of the content of the picture, and also identifies objects.
+
+Download the below file to your local machine and unzip it.
+
+Go to notebooks.azure.com and sign in with the account you created earlier. Upload the .ipynb file from the unzipped directory on your machine to a project of your choice. The one I created and used is lqaidemos. Read the markdown and execute the cells by using shift+Enter or by clicking the run cell icon in Jupyter.
