@@ -1,0 +1,3 @@
+Continue the practical 5 Bot 
+
+Create weather response 

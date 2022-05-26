@@ -1,0 +1,4 @@
+I'm using a Mac and had the same issue. 
+
+I replaced "py" with "python3" in the command line and it worked for me.
+
